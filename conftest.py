@@ -12,6 +12,6 @@ def driver():
     options = Options()
     options.add_argument(Data.WINDIW_SIZE)
     driver = webdriver.Firefox(service=service, options=options)
-    driver.get(Data.BACE_URL)
+    driver.get(Data.URL_SCOOTER)
     yield driver
     driver.quit()

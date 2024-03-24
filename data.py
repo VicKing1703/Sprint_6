@@ -1,12 +1,15 @@
-from selenium.webdriver.firefox.service import Service
+from datetime import date
+
 
 class Data:
 
     # URL-адрес
-    BACE_URL = 'https://qa-scooter.praktikum-services.ru/'
+    URL_SCOOTER = 'https://qa-scooter.praktikum-services.ru/'
+    URL_DZEN = 'https://dzen.ru/'
 
     # Разрешение окна
-    WINDIW_SIZE = '--window-size=1920,1080'
+    WINDIW_SIZE = '--window-size=1920,1080'  # для Chrome
+    WINDIW_SIZE = 'start-maximized'  # для Firefox
 
     # Имя и фамилия
     NAME = 'Иван'
@@ -21,4 +24,8 @@ class Data:
     # Телефон
     PHONE = '+79998887766'
 
-    #
+    # Комментарий
+    COMMENT = 'Какой-то комментарий'
+
+    # Дата
+    CURRENT_DATE = date.today()
