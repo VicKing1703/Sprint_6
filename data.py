@@ -1,4 +1,5 @@
 from mimesis import Person, Locale, Address
+from datetime import date
 
 
 class Data:
@@ -30,7 +31,7 @@ class Data:
     COMMENT = 'Какой-то комментарий'
 
     # Дата
-    CURRENT_DATE = '27.03.2024'
+    CURRENT_DATE = date.today().strftime('%d.%m.%Y')
 
     # Ответы в вопросах
     ANSWER_0 = 'Сутки — 400 рублей. Оплата курьеру — наличными или картой.'

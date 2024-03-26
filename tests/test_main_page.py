@@ -22,6 +22,6 @@ class TestQuestionOnPage:
     def test_questions(self, driver, num, expected):
 
         main_page = MainPage(driver)
-
+        main_page.click_to_cooce_accept()
         main_page.scroll_to_question()
         assert main_page.get_answer_text(num) == expected

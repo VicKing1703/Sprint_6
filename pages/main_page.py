@@ -10,6 +10,7 @@ class MainPage(BasePage):
     ACCORDION_QUESTION_LOCATOR = By.XPATH, "//div[@aria-controls='accordion__panel-{}']"  # выпадающее поле с вопросами
     ACCORDION_ANSWER_LOCATOR = By.ID, "accordion__panel-{}"  # выпадающее поле с ответами
     HEADING_TEXT_LOCATOR = By.CLASS_NAME, "Home_Header__iJKdX"  # заголовок страницы "Самокат на пару дней"
+    BUTTON_COOCE_ACCEPT_LOCATOR = By.XPATH, "//button[text()='да все привыкли']"  # кнопка "да все привыкли"
 
     @allure.step('Проскроллить страницу до вопросов')
     def scroll_to_question(self):
@@ -30,3 +31,7 @@ class MainPage(BasePage):
     @allure.step('Получить заголовок страницы "Самокат на пару дней"')
     def get_heading_text(self):
         return self.get_text_from_element(self.HEADING_TEXT_LOCATOR)
+
+    @allure.step('Нажать на кнопку "да все привыкли"')
+    def click_to_cooce_accept(self):
+        self.click_to_element(self.BUTTON_COOCE_ACCEPT_LOCATOR)

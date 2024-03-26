@@ -26,10 +26,10 @@ class OrderPage(BasePage):
     def check_title_about_rent(self):
         return self.find_element_with_wait(OrderPageLocators.TITLE_ABOUT_RENT_LOCATOR)
 
-    @allure.step('Заполнение полей формы "Когда привезти самокат" и нажатие на кнопку "Заказать"')
+    @allure.step('Заполнение полей формы "Когда привезти самокат"')
     def set_when_to_bring_scooter(self, date):
         self.add_text_to_element(OrderPageLocators.FIELD_DATE_LOCATOR, date)
-        self.click_to_element(OrderPageLocators.FIELD_DATE_LOCATOR)
+        self.click_to_element(OrderPageLocators.TITLE_ABOUT_RENT_LOCATOR)
 
     @allure.step('Выбор срока аренды "Сутки"')
     def choose_period_one_day(self):
@@ -40,10 +40,6 @@ class OrderPage(BasePage):
     def choose_period_two_days(self):
         self.click_to_element(OrderPageLocators.LIST_PERIOD_LOCATOR)
         self.click_to_element(OrderPageLocators.CHECK_TWO_DAYS_PERIOD_LOCATOR)
-
-    @allure.step('Выбор цвета самоката "Черный жемчуг"')
-    def choose_color_scooter_black(self):
-        self.click_to_element(OrderPageLocators.CHECK_COLOR_BLACK_LOCATOR)
 
     @allure.step('Выбор цвета самоката "Серая безысходность"')
     def choose_color_scooter_grey(self):
@@ -68,7 +64,3 @@ class OrderPage(BasePage):
     @allure.step('Проверка попапа офрмления заказа')
     def check_order_confirmation(self):
         return self.get_text_from_element(OrderPageLocators.POPUP_ORDER_COMPLETE_LOCATOR)
-
-    @allure.step('Нажатие на кнопку "Посмотреть статус статус"')
-    def click_to_check_status_button(self):
-        self.click_to_element(OrderPageLocators.BUTTON_CHECK_STATUS)

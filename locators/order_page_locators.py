@@ -18,7 +18,7 @@ class OrderPageLocators:
     TITLE_ABOUT_RENT_LOCATOR = By.XPATH, "//div[text()='Про аренду']"  # заголовок страницы "Про аренду"
     FIELD_DATE_LOCATOR = By.XPATH, "//input[@placeholder='* Когда привезти самокат']"  # поле "Когда привезти самокат"
     DROPDOWN_TODAY_LOCATOR = By.XPATH, "//div[contains(@class, 'react-datepicker__day--today')]"  # сегодняшний день в выпадающем календаре
-    LIST_PERIOD_LOCATOR = By.XPATH, "//div[@class='Dropdown-root']"  # выпадающий список "Срок аренды"
+    LIST_PERIOD_LOCATOR = By.XPATH, "//div[text()='* Срок аренды']"  # выпадающий список "Срок аренды"
     CHECK_DAY_PERIOD_LOCATOR = By.XPATH, "//*[@class='Dropdown-option' and contains(text(), 'сутки')]"  # элемент "Сутки" выпадающего списка "Срок аренды"
     CHECK_TWO_DAYS_PERIOD_LOCATOR = By.XPATH, "//*[@class='Dropdown-option' and contains(text(), 'двое суток')]"  # элемент "двое сутки" выпадающего списка "Срок аренды"
     CHECK_COLOR_BLACK_LOCATOR = By.XPATH, "//label[@for='black']"  # чекбокс "Черный жемчуг"
