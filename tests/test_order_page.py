@@ -1,45 +1,39 @@
+import allure
 from data import Data
-from locators.order_page_locators import OrderPageLocators
-from pages.base_page import BasePage
 from pages.order_page import OrderPage
-
 from pages.main_page import MainPage
 
 
-class TestOrderPage(OrderPage):
+class TestOrderPage:
 
-    def test_order_scooter(self):
+    @allure.title('Тест оформления заказа через кнопку в хедере страницы')
+    @allure.description('Оформляем заказ через кнопку "Заказать" в хеддере страницы, '
+                        'с заполнением только обязательных полей')
+    def test_order_scooter_from_header_button(self, driver):
+        order_page = OrderPage(driver)
 
-        MainPage.click_to_element(*BasePage.BUTTON_ORDER_LOCATOR)
+        order_page.click_to_order_button_on_header()
+        order_page.set_who_is_the_scooter_for(Data.NAME, Data.SURNAME, Data.ADDRESS, Data.METRO_STATION, Data.PHONE)
+        order_page.check_title_about_rent()
+        order_page.set_when_to_bring_scooter(Data.CURRENT_DATE)
+        order_page.click_to_order_button()
+        order_page.check_popup_confirmation()
+        order_page.click_to_yes_button()
+        assert 'Заказ оформлен' in order_page.check_order_confirmation()
 
-        self.set_who_is_the_scooter_for(
-            *OrderPageLocators.TITLE_WHO_IS_THE_SCOOTER_FOR_LOCATOR,
-            OrderPageLocators.FIELD_NAME_LOCATOR, Data.NAME,
-            OrderPageLocators.FIELD_SURNAME_LOCATOR, Data.SURNAME,
-            OrderPageLocators.FIELD_ADDRESS_LOCATOR, Data.ADDRESS,
-            OrderPageLocators.KEY_SUBWAY_LOCATOR,
-            OrderPageLocators.FEELD_SUBWAY_LOCATOR,
-            Data.METRO_STATION, OrderPageLocators.DROPDOWN_STATION_LOCATOR,
-            OrderPageLocators.FIELD_PHONE_LOCATOR, Data.PHONE,
-            OrderPageLocators.BUTTON_NEXT_LOCATOR
-        )
+    @allure.title('Тест оформления заказа через кнопку в нижней части страницы')
+    @allure.description('Оформляем заказ через кнопку "Заказать" в нижней части страницы, с заполнением всех полей')
+    def test_order_scooter_from_down_button(self, driver):
+        order_page = OrderPage(driver)
+        main_page = MainPage(driver)
 
-        self.check_title_about_rent(*OrderPageLocators.TITLE_ABOUT_RENT_LOCATOR)
-
-        self.set_about_rent(
-            *OrderPageLocators.TITLE_ABOUT_RENT_LOCATOR,
-            OrderPageLocators.FIELD_DATE_LOCATOR,
-            Data.CURRENT_DATE,
-            OrderPageLocators.LIST_PERIOD_LOCATOR,
-            OrderPageLocators.CHECK_PERIOD_LOCATOR,
-            OrderPageLocators.CHECK_COLOR_BLACK_LOCATOR,
-            OrderPageLocators.FIELD_COMMENT_LOCATOR,
-            Data.COMMENT,
-            OrderPageLocators.BUTTON_ORDER_LOCATOR
-        )
-
-        self.check_popup_confirmation(*OrderPageLocators.POPUP_CONFIRM_LOCATOR)
-
-        self.click_to_button(*OrderPageLocators.POPUP_BUTTON_YES_LOCATOR)
-
-        assert self.check_order_confirmation(*OrderPageLocators.POPUP_ORDER_COMPLETE_LOCATOR) == "Заказ оформлен"
+        main_page.scroll_and_click_to_down_order_button()
+        order_page.set_who_is_the_scooter_for(Data.NAME, Data.SURNAME, Data.ADDRESS, Data.METRO_STATION, Data.PHONE)
+        order_page.check_title_about_rent()
+        order_page.set_when_to_bring_scooter(Data.CURRENT_DATE)
+        order_page.choose_color_scooter_grey()
+        order_page.add_comment_to_order(Data.COMMENT)
+        order_page.click_to_order_button()
+        order_page.check_popup_confirmation()
+        order_page.click_to_yes_button()
+        assert 'Заказ оформлен' in order_page.check_order_confirmation()
