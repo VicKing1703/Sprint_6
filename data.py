@@ -12,6 +12,8 @@ class Data:
     WIDTH = "--width=1920"
     HEIGHT = "--height=1080"
 
+
+class DataForForms:
     # Случайное имя
     NAME = Person(locale=Locale.RU).name()
 
@@ -32,6 +34,9 @@ class Data:
 
     # Дата
     CURRENT_DATE = date.today().strftime('%d.%m.%Y')
+
+
+class DataForQuestions:
 
     # Ответы в вопросах
     ANSWER_0 = 'Сутки — 400 рублей. Оплата курьеру — наличными или картой.'

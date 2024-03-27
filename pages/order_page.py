@@ -6,11 +6,6 @@ from locators.order_page_locators import OrderPageLocators
 
 class OrderPage(BasePage):
 
-    # def select_dropdown_menu_element(self, locator_menu, locator_item):
-    #     self.click_to_element(locator_menu)
-    #     self.scroll_to_element(locator_item)
-    #     self.click_to_element(locator_item)
-
     @allure.step('Заполнение всех полей формы "Для кого самокат" и нажатие на кнопку "Далее"')
     def set_who_is_the_scooter_for(self,  name, surname, address, subway_station, phone):
         self.add_text_to_element(OrderPageLocators.FIELD_NAME_LOCATOR, name)

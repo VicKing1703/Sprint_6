@@ -1,37 +1,57 @@
 import allure
-from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.wait import WebDriverWait
+from locators.main_page_locators import MainPageLocators
 from pages.base_page import BasePage
+from data import Data
 
 
 class MainPage(BasePage):
 
-    BUTTON_DOWN_ORDER_LOCATOR = By.XPATH, "//div[@class='Home_FinishButton__1_cWm']/child::button"  # кнопка "Заказать" внизу экрана
-    QUESTIONS_LOCATOR = By.XPATH, "//div[text()='Вопросы о важном']/parent::div"  # раздел "Вопросы о важном"
-    ACCORDION_QUESTION_LOCATOR = By.XPATH, "//div[@aria-controls='accordion__panel-{}']"  # выпадающее поле с вопросами
-    ACCORDION_ANSWER_LOCATOR = By.ID, "accordion__panel-{}"  # выпадающее поле с ответами
-    HEADING_TEXT_LOCATOR = By.CLASS_NAME, "Home_Header__iJKdX"  # заголовок страницы "Самокат на пару дней"
-    BUTTON_COOCE_ACCEPT_LOCATOR = By.XPATH, "//button[text()='да все привыкли']"  # кнопка "да все привыкли"
-
     @allure.step('Проскроллить страницу до вопросов')
     def scroll_to_question(self):
-        self.scroll_to_element(self.QUESTIONS_LOCATOR)
+        self.scroll_to_element(MainPageLocators.QUESTIONS_LOCATOR)
 
     @allure.step('Получение текста ответа нажатием на вопрос')
     def get_answer_text(self, num):
-        locator_question_format = self.format_locators(self.ACCORDION_QUESTION_LOCATOR, num)
-        locator_answer_format = self.format_locators(self.ACCORDION_ANSWER_LOCATOR, num)
+        locator_question_format = self.format_locators(MainPageLocators.ACCORDION_QUESTION_LOCATOR, num)
+        locator_answer_format = self.format_locators(MainPageLocators.ACCORDION_ANSWER_LOCATOR, num)
         self.click_to_element(locator_question_format)
         return self.get_text_from_element(locator_answer_format)
 
     @allure.step('Проскроллить до кнопки "Заказать" внизу экрана и нажать ее')
     def scroll_and_click_to_down_order_button(self):
-        self.scroll_to_element(self.BUTTON_DOWN_ORDER_LOCATOR)
-        self.click_to_element(self.BUTTON_DOWN_ORDER_LOCATOR)
+        self.scroll_to_element(MainPageLocators.BUTTON_DOWN_ORDER_LOCATOR)
+        self.click_to_element(MainPageLocators.BUTTON_DOWN_ORDER_LOCATOR)
 
     @allure.step('Получить заголовок страницы "Самокат на пару дней"')
     def get_heading_text(self):
-        return self.get_text_from_element(self.HEADING_TEXT_LOCATOR)
+        return self.get_text_from_element(MainPageLocators.HEADING_TEXT_LOCATOR)
 
     @allure.step('Нажать на кнопку "да все привыкли"')
-    def click_to_cooce_accept(self):
-        self.click_to_element(self.BUTTON_COOCE_ACCEPT_LOCATOR)
+    def click_to_cooke_accept(self):
+        self.click_to_element(MainPageLocators.BUTTON_COOKE_ACCEPT_LOCATOR)
+
+    @allure.step('Нажать на логотип "Яндекс" в хедере')
+    def click_to_yandex_logo(self):
+        self.click_to_element(MainPageLocators.BASE_LOGO_YANDEX_LOCATOR)
+
+    @allure.step('Нажать на логотип "Самокат" в хедере')
+    def click_to_samokat_logo(self):
+        self.click_to_element(MainPageLocators.BASE_LOGO_SAMOKAT_LOCATOR)
+
+    @allure.step('Нажать на кнопку "Заказать" в хедере')
+    def click_to_order_button_on_header(self):
+        self.click_to_element(MainPageLocators.BASE_BUTTON_ORDER_HEADER_LOCATOR)
+
+    @allure.step('Переключиться на новую вкладку')
+    def switch_tab(self):
+        return self.driver.switch_to.window(self.driver.window_handles[-1])
+
+    @allure.step('Получить текущий URL')
+    def get_current_url(self):
+        return self.driver.current_url
+
+    @allure.step('Ожидание загрузки сайта')
+    def wait_loading_site(self):
+        WebDriverWait(self.driver,10).until(expected_conditions.url_to_be(Data.URL_DZEN))

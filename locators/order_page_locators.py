@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from data import Data
+from data import DataForForms
 
 
 class OrderPageLocators:
@@ -13,7 +13,7 @@ class OrderPageLocators:
     FIELD_SUBWAY_LOCATOR = By.XPATH, "//input[@placeholder='* Станция метро']"  # поле ввода "Станция метро"
     DROPDOWN_STATION_LOCATOR = By.XPATH, ("//input[@placeholder='* Станция метро']/"
                                           "parent::div[@class='select-search__value']/"
-                                          "following::*[contains(text(), '") + Data.METRO_STATION + "')]"  # выпадающий список станций метро (да, можно более универсальный локатор, но...
+                                          "following::*[contains(text(), '") + DataForForms.METRO_STATION + "')]"  # выпадающий список станций метро (да, можно более универсальный локатор, но...
     BUTTON_NEXT_LOCATOR = By.XPATH, "//button[text()='Далее']"  # кнопка "Далее"
     TITLE_ABOUT_RENT_LOCATOR = By.XPATH, "//div[text()='Про аренду']"  # заголовок страницы "Про аренду"
     FIELD_DATE_LOCATOR = By.XPATH, "//input[@placeholder='* Когда привезти самокат']"  # поле "Когда привезти самокат"
