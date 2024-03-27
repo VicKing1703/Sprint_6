@@ -45,13 +45,13 @@ class MainPage(BasePage):
         self.click_to_element(MainPageLocators.BASE_BUTTON_ORDER_HEADER_LOCATOR)
 
     @allure.step('Переключиться на новую вкладку')
-    def switch_tab(self):
-        return self.driver.switch_to.window(self.driver.window_handles[-1])
+    def switch_tab_on_browserer(self):
+        return self.switch_tab()
 
     @allure.step('Получить текущий URL')
-    def get_current_url(self):
-        return self.driver.current_url
+    def get_url_dzen(self):
+        return self.get_current_url()
 
     @allure.step('Ожидание загрузки сайта')
-    def wait_loading_site(self):
-        WebDriverWait(self.driver,10).until(expected_conditions.url_to_be(Data.URL_DZEN))
+    def wait_loading_site_Dzen(self):
+        self.wait_loading_site(Data.URL_DZEN)

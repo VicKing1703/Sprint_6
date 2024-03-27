@@ -23,6 +23,6 @@ class TestHeaderLogoClick:
         main_page = MainPage(driver)
 
         main_page.click_to_yandex_logo()
-        main_page.switch_tab()
-        main_page.wait_loading_site()
-        assert main_page.get_current_url() == Data.URL_DZEN
+        main_page.switch_tab_on_browserer()
+        main_page.wait_loading_site_Dzen()
+        assert main_page.get_url_dzen() == Data.URL_DZEN

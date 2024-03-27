@@ -36,3 +36,15 @@ class BasePage:
         method,  locator = locator_1
         locator = locator.format(num)
         return (method, locator)
+
+    # Метод для ожидания загрузки сайта
+    def wait_loading_site(self, url):
+        WebDriverWait(self.driver,10).until(expected_conditions.url_to_be(url))
+
+    # Метод для получения текущего URL
+    def get_current_url(self):
+        return self.driver.current_url
+
+    # Метод для переключения на новую вкладку
+    def switch_tab(self):
+        return self.driver.switch_to.window(self.driver.window_handles[-1])
